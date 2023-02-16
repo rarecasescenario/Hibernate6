@@ -23,8 +23,8 @@ public class HibernateUtil {
 			Properties props = new Properties(); 
 			
 			Configuration cfg = new Configuration().configure();
-//			props = cfg.getProperties();
-//			System.out.println("JDBC URL: " + props.getProperty("hibernate.connection.url"));
+			props = cfg.getProperties();
+			log.info("JDBC URL: " + props.getProperty("hibernate.connection.url"));
 			
 			StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
 					.applySettings(cfg.getProperties())
@@ -32,8 +32,8 @@ public class HibernateUtil {
 			try {
 				sessionFactory = cfg.buildSessionFactory();
 			} catch (Exception e) {
-				//StandardServiceRegistryBuilder.destroy( registry );
-				e.printStackTrace();
+				StandardServiceRegistryBuilder.destroy( registry );
+				log.error("ERROR: ", e.getMessage());
 			}
 		}
 	}
