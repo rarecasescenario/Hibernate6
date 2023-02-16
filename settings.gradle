@@ -1,2 +1,4 @@
 rootProject.name = 'Hibernate6'
 include('SessionFactoryCreation')
+include('InsertDataIntoDBUsingXML')
+
