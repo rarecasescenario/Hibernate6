@@ -3,7 +3,7 @@
     <Properties>
     	<Property name="LOG_PATTERN">[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</Property>
     	<Property name="LOG_DIR">C:\tmp\logs</Property>
-    	<Property name="LOG_FILE_NAME">HibernateSession</Property>
+    	<Property name="LOG_FILE_NAME">InsertDataIntoDBusingXML</Property>
     	<Property name="LOG_FILE_PATTERN">${LOG_DIR}/${LOG_FILE_NAME}-%d{yyyy-MM-dd}.log</Property>
     	
     </Properties>

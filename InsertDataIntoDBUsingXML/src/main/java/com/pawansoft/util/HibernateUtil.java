@@ -6,8 +6,9 @@ import java.util.Properties;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -21,14 +22,23 @@ public class HibernateUtil {
 	static {
 		if(sessionFactory == null) {
 			Properties props = new Properties(); 
+			Configuration cfg = new Configuration();
 			
-			Configuration cfg = new Configuration().configure();
+			
 			props = cfg.getProperties();
 			log.info("JDBC URL: " + props.getProperty("hibernate.connection.url"));
 			
+			cfg.addAnnotatedClass(com.pawansoft.model.User.class);
 			StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
 					.applySettings(cfg.getProperties())
 					.build();
+			
+			Metadata metaData = new MetadataSources(registry)
+					.getMetadataBuilder()
+					.build();
+			
+			sessionFactory = metaData.getSessionFactoryBuilder().build();
+			
 			try {
 				sessionFactory = cfg.buildSessionFactory();
 			} catch (Exception e) {
